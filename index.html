@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 
 <meta charset="UTF-8">
@@ -14,7 +14,7 @@ font-family:Arial;
 
 .container{
 position:relative;
-width:500px;
+width:400px;
 margin:auto;
 }
 
@@ -24,13 +24,19 @@ width:100%;
 
 .name{
 position:absolute;
-bottom:180px;
 left:50%;
 transform:translateX(-50%);
-font-size:38px;
+bottom:240px;
+font-size:34px;
 color:white;
 font-weight:bold;
-font-family: 'Tahoma';
+font-family:Tahoma;
+}
+
+button{
+margin:5px;
+padding:10px;
+font-size:16px;
 }
 
 </style>
@@ -43,16 +49,18 @@ font-family: 'Tahoma';
 
 <input type="text" id="name">
 <button onclick="generate()">إنشاء البطاقة</button>
+<button onclick="download()">تحميل البطاقة</button>
 
-<div class="container">
+<div class="container" id="card">
 
-<img src="eid.png">
+<img src="eid.png.png">
 
 <div class="name" id="cardname">
-اسمك هنا
 </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
 
@@ -61,6 +69,22 @@ function generate(){
 let name=document.getElementById("name").value;
 
 document.getElementById("cardname").innerHTML=name;
+
+}
+
+function download(){
+
+html2canvas(document.getElementById("card")).then(canvas=>{
+
+let link=document.createElement("a");
+
+link.download="card.png";
+
+link.href=canvas.toDataURL();
+
+link.click();
+
+});
 
 }
 
